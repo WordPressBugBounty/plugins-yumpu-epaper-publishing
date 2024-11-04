@@ -7,7 +7,7 @@ class DocumentUpload {
     {
         add_action('admin_menu', function () {
             add_submenu_page(
-                null,
+                '',
                 esc_html__('Upload document', 'yumpu-epaper-publishing'),
                 'null',
                 'edit_others_posts',

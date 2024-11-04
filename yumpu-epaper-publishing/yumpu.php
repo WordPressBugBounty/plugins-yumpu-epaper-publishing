@@ -5,7 +5,7 @@
  * Author: Yumpu.com
  * Author URI: https://www.yumpu.com
  * Requires at least: 4.6
- * Version: 3.0.7
+ * Version: 3.0.8
  * Requires PHP: 5.6
  * License: GPLv3 or later
  * Text Domain: yumpu-epaper-publishing
@@ -17,7 +17,12 @@ Class WP_Yumpu {
 
     public function __construct() {
         spl_autoload_register(static function ($class) {
-            $file = str_replace(['YumpuPlugin\\', '/', '\\'], DIRECTORY_SEPARATOR, __DIR__ . '/lib/' . $class) . '.php';
+            $file = str_replace(
+                    ['\\', '/YumpuPlugin/', '/'],
+                    ['/', '/', DIRECTORY_SEPARATOR],
+                    __DIR__ . '/lib/' . $class
+                ) . '.php';
+
             if (file_exists($file)) {
                 require($file);
             }
