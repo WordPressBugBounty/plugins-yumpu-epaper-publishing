@@ -4,7 +4,7 @@ Contributors: yumpu
 Tags: epaper, flipbook, publishing, yumpu, publication
 Requires at least: 4.6
 Tested up to: 6.7
-Stable tag: 3.0.8
+Stable tag: 3.0.10
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0

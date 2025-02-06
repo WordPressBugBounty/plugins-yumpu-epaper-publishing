@@ -105,6 +105,7 @@ class YumpuAPI {
             'redirection' => 3,
             'headers'   => [
                 'X-ACCESS-TOKEN' => $this->apiToken,
+                'user-agent' => 'yumpu-epaper-publishing 3.0.10',
                 'Content-Type'=> "multipart/form-data; boundary=$boundary"
             ],
         ];
@@ -125,6 +126,7 @@ class YumpuAPI {
             'redirection' => 3,
             'headers'   => [
                 'X-ACCESS-TOKEN' => $this->apiToken,
+                'user-agent' => 'yumpu-epaper-publishing 3.0.10',
                 'content-type' => 'application/json',
             ],
         ];
@@ -145,6 +147,7 @@ class YumpuAPI {
             'redirection' => 3,
             'headers'   => [
                 'X-ACCESS-TOKEN' => $api_key,
+                'user-agent' => 'yumpu-epaper-publishing 3.0.10',
                 'content-type' => 'application/json',
             ],
         ];

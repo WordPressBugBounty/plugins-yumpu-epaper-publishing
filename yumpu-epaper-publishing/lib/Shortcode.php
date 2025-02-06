@@ -23,8 +23,10 @@ class Shortcode
      */
     public function yumpuShortcode($attributes, $content = null)
     {
-        if (isset($attributes['embed_id']) && strlen($attributes['embed_id'] > 1)) {
-            return $this->iframeEmbed($attributes['embed_id'], $attributes);
+        if (isset($attributes['embed_id']) && strlen($attributes['embed_id']) > 1) {
+            $embed_url = 'https://www.yumpu.com/xx/embed/view/' . $attributes['embed_id'];
+
+            return $this->iframeEmbed($embed_url, $attributes);
         }
 
         if (!isset($attributes['epaper_id'])) {
@@ -78,13 +80,14 @@ class Shortcode
         return preg_replace(array_keys($replacements), array_values($replacements), $content);
     }
 
-    private function iframeEmbed($embed_id, $attrs)
+    private function iframeEmbed($embed_src, $attrs)
     {
+        /** @noinspection HtmlUnknownTarget */
         return sprintf(
-            '<iframe width="%dpx" height="%dpx" src="https://www.yumpu.com/xx/embed/view/%s" allowfullscreen="allowfullscreen"  allowtransparency="true"></iframe>',
+            '<iframe width="%dpx" height="%dpx" src="%s" allowfullscreen="allowfullscreen"  allowtransparency="true"></iframe>',
             $this->width($attrs),
             $this->height($attrs),
-            $embed_id
+            esc_url($embed_src)
         );
     }
 

@@ -5,7 +5,7 @@
  * Author: Yumpu.com
  * Author URI: https://www.yumpu.com
  * Requires at least: 4.6
- * Version: 3.0.8
+ * Version: 3.0.10
  * Requires PHP: 5.6
  * License: GPLv3 or later
  * Text Domain: yumpu-epaper-publishing

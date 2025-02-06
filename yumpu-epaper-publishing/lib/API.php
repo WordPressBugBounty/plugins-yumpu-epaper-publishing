@@ -2,6 +2,7 @@
 
 namespace YumpuPlugin;
 
+use WP_REST_Request;
 use WP_REST_Server;
 use WP_Error;
 use WP_HTTP_Response;
@@ -24,13 +25,14 @@ class API {
     /**
      * @return WP_Error|WP_HTTP_Response
      */
-    public function uploadDocument()
+    public function uploadDocument(WP_REST_Request $request)
     {
         try {
-            if ( ! wp_verify_nonce($_POST['_wpnonce'], 'wp_rest') ) {
-                return new WP_Error('YUMPU API Error',  __( 'Security check', 'yumpu-epaper-publishing'), ['status' => 500]);
+            if ( ! wp_verify_nonce($request->get_param('_wpnonce'), 'wp_rest') ) {
+                return new WP_Error('YUMPU API Error', __( 'Security check', 'yumpu-epaper-publishing'), ['status' => 500]);
             }
-            $this->yumpuApi->uploadDocument($_FILES['document'], $_POST['title'], $_POST['description']);
+
+            $this->yumpuApi->uploadDocument($request->get_file_params()['document'], $request->get_param('title'), $request->get_param('description'));
             return rest_ensure_response(['status' => 'ok']);
         } catch (YumpuAPIException $e) {
             return new WP_Error('YUMPU API Error', $e->getMessage(), ['status' => 500]);
@@ -79,6 +81,16 @@ class API {
                 'methods'  => WP_REST_Server::CREATABLE,
                 'callback' => [$this, 'uploadDocument'],
                 'permission_callback' => [$this, 'checkEditorAccess'],
+                'args' => [
+                    'title' => [
+                        'type'        => 'string',
+                        'required'    => true,
+                    ],
+                    'description' => [
+                        'type'        => 'string',
+                        'required'    => true,
+                    ],
+                ],
             ]
         );
     }
